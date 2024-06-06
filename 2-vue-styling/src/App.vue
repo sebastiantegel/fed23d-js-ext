@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const todo = { text: "Lorem ipsum", done: false };
+const todo = { text: "Lorem ipsum dolor sit amet", done: false };
 </script>
 
 <template>
