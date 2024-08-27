@@ -1,9 +1,15 @@
+import { Params } from "react-router-dom";
 import { IMovie } from "../models/IMovie";
-import { IOmdbResponse } from "../models/IOmdbResponse";
+import { getMovie, getMovies } from "../services/movieService";
 
 export const moviesLoader = async (): Promise<IMovie[]> => {
-  const response = await fetch("https://omdbapi.com/?apikey=416ed51a&s=star");
-  const result: IOmdbResponse = await response.json();
+  return await getMovies("star");
+};
 
-  return result.Search;
+interface IMovieLoader {
+  params: Params<string>;
+}
+
+export const movieLoader = async ({ params }: IMovieLoader) => {
+  return await getMovie(params.id!);
 };

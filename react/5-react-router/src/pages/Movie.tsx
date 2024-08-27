@@ -1,26 +1,26 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useLoaderData } from "react-router-dom";
 import { IMovieExt } from "../models/IMovieExt";
 
 export const Movie = () => {
-  const [movie, setMovie] = useState<IMovieExt>();
+  const movie = useLoaderData() as IMovieExt;
+  // const [movie, setMovie] = useState<IMovieExt>();
 
-  const { id } = useParams();
+  // const { id } = useParams();
 
-  useEffect(() => {
-    const getData = async () => {
-      const response = await fetch(
-        `https://omdbapi.com/?apikey=416ed51a&i=${id}`
-      );
-      const result: IMovieExt = await response.json();
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const response = await fetch(
+  //       `https://omdbapi.com/?apikey=416ed51a&i=${id}`
+  //     );
+  //     const result: IMovieExt = await response.json();
 
-      setMovie(result);
-    };
+  //     setMovie(result);
+  //   };
 
-    if (id && !movie) {
-      getData();
-    }
-  });
+  //   if (id && !movie) {
+  //     getData();
+  //   }
+  // });
 
   return (
     <section className="movie">

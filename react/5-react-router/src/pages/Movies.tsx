@@ -1,14 +1,18 @@
-import { useEffect, useState } from "react";
+import { FormEvent, useState } from "react";
 import { IMovie } from "../models/IMovie";
-import { IOmdbResponse } from "../models/IOmdbResponse";
+// import { IOmdbResponse } from "../models/IOmdbResponse";
 import { MoviesPresentation } from "../components/MoviesPresentation";
-import { useLoaderData } from "react-router-dom";
+// import { useLoaderData } from "react-router-dom";
+import { getMovies } from "../services/movieService";
 
 export const Movies = () => {
-  const movies = useLoaderData() as IMovie[];
+  // const movies = useLoaderData() as IMovie[];
 
-  // const [movies, setMovies] = useState<IMovie[]>([]);
-  // const [fetched, setFetched] = useState(false);
+  const [movies, setMovies] = useState<IMovie[]>(
+    JSON.parse(localStorage.getItem("movies") || "[]")
+  );
+  const [searching, setSearching] = useState(false);
+  const [searchText, setSearchText] = useState("");
 
   // useEffect(() => {
   //   const getData = async () => {
@@ -29,9 +33,31 @@ export const Movies = () => {
   //   if (!fetched) getData();
   // });
 
+  const handleSearch = async (e: FormEvent) => {
+    e.preventDefault();
+    setSearching(true);
+
+    const moviesFromSearch = await getMovies(searchText);
+    setMovies(moviesFromSearch);
+
+    setSearching(false);
+  };
+
   return (
     <>
-      <MoviesPresentation movies={movies}></MoviesPresentation>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={searchText}
+          onChange={(e) => setSearchText(e.target.value)}
+        />
+        <button>Sök</button>
+      </form>
+      {searching ? (
+        <h2>Loading...</h2>
+      ) : (
+        <MoviesPresentation movies={movies}></MoviesPresentation>
+      )}
     </>
   );
 };

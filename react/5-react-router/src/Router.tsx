@@ -6,7 +6,7 @@ import { Layout } from "./pages/Layout";
 import { NotFound } from "./pages/NotFound";
 import { Movie } from "./pages/Movie";
 import { Movies } from "./pages/Movies";
-import { moviesLoader } from "./loaders/movieLoader";
+import { movieLoader, moviesLoader } from "./loaders/movieLoader";
 
 export const router = createBrowserRouter([
   {
@@ -33,12 +33,13 @@ export const router = createBrowserRouter([
         // http://localhost:5173/movies
         path: "/movies",
         element: <Movies></Movies>,
-        loader: moviesLoader,
+        // loader: moviesLoader,
       },
       {
         // http://localhost:5173/movie/4711
         path: "/movie/:id",
         element: <Movie></Movie>,
+        loader: movieLoader,
       },
     ],
   },
