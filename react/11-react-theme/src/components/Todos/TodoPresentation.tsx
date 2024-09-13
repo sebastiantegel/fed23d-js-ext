@@ -1,7 +1,8 @@
 import { useContext } from "react";
-import { Todo } from "../models/Todo";
-import { ActionTypes } from "../reducers/TodosReducer";
-import { TodosDispatchContext } from "../contexts/TodosDispatchContext";
+import { TodosDispatchContext } from "../../contexts/TodosDispatchContext";
+import { Todo } from "../../models/Todo";
+import { ActionTypes } from "../../reducers/TodosReducer";
+import { Button } from "../Button";
 
 interface ITodoPresentation {
   todo: Todo;
@@ -13,7 +14,7 @@ export const TodoPresentation = ({ todo }: ITodoPresentation) => {
   return (
     <li>
       {todo.text}
-      <button
+      <Button
         onClick={() =>
           dispatch({
             type: ActionTypes.TOGGLED,
@@ -21,9 +22,9 @@ export const TodoPresentation = ({ todo }: ITodoPresentation) => {
           })
         }
       >
-        Toggle
-      </button>
-      <button
+        <>Toggle</>
+      </Button>
+      <Button
         onClick={() =>
           dispatch({
             type: ActionTypes.REMOVED,
@@ -31,8 +32,8 @@ export const TodoPresentation = ({ todo }: ITodoPresentation) => {
           })
         }
       >
-        Remove
-      </button>
+        <>Remove</>
+      </Button>
     </li>
   );
 };

@@ -1,6 +1,7 @@
 import { useState, FormEvent, useContext } from "react";
-import { ActionTypes } from "../reducers/TodosReducer";
-import { TodosDispatchContext } from "../contexts/TodosDispatchContext";
+import { TodosDispatchContext } from "../../contexts/TodosDispatchContext";
+import { ActionTypes } from "../../reducers/TodosReducer";
+import { Button } from "../Button";
 
 export const AddTodo = () => {
   const dispatch = useContext(TodosDispatchContext);
@@ -22,7 +23,9 @@ export const AddTodo = () => {
         value={userInput}
         onChange={(e) => setUserInput(e.target.value)}
       />
-      <button>Add</button>
+      <Button>
+        <>Add</>
+      </Button>
     </form>
   );
 };
